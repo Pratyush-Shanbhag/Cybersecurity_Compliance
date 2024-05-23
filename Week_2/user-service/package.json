@@ -1,11 +1,15 @@
 {
   "devDependencies": {
-    "aws-sdk": "^2.1625.0",
+    "aws-sdk": "^2.1626.0",
     "aws-sdk-mock": "^6.0.1",
     "jest": "^29.7.0"
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.582.0",
+    "@aws-sdk/lib-dynamodb": "^3.582.0",
+    "json-schema-library": "^10.0.0-rc1"
   }
-  
 }
