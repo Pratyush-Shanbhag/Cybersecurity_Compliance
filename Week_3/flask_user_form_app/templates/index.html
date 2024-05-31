@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Option Selector</title>
+</head>
+<body>
+    <h1>Select an Option</h1>
+    <form action="{{ url_for('result') }}" method="post">
+        <label for="options">Choose an option:</label>
+        <select id="options" name="options">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
