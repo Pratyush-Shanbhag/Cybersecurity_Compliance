@@ -3,19 +3,21 @@ import './SurveyForm.css'; // Create and import a CSS file for styles
 
 const SurveyForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    experience: 'low',
-    age: '',
+    name: "",
+    email: "",
+    experience: "",
+    age: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+    setFormData(prevFormData => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      }
+    })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +66,9 @@ const SurveyForm = () => {
             id="experience"
             value={formData.experience}
             onChange={handleChange}
+            required
           >
+            <option value="">Please select</option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -80,6 +84,7 @@ const SurveyForm = () => {
               value="Teen"
               checked={formData.age === 'Teen'}
               onChange={handleChange}
+              required
             />
             Teen
           </label>
@@ -109,7 +114,7 @@ const SurveyForm = () => {
         <button type="submit">Submit</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export default SurveyForm;
