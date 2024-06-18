@@ -25,7 +25,8 @@ const SurveyForm = ({ setMessage, setUserText }) => {
         e.preventDefault();
         console.log('worked1')
         try {
-            const response = await axios.post('https://yxz0h9i8lf.execute-api.us-east-1.amazonaws.com/prod/surveyform', formData, {
+            //const response = await axios.post('https://yxz0h9i8lf.execute-api.us-east-1.amazonaws.com/prod/surveyform', formData, {
+            const response = await axios.post('http://localhost:3000/surveyform', formData, {
                 headers: {
                   'Content-Type': 'application/json',
                   // Add any other necessary headers here
