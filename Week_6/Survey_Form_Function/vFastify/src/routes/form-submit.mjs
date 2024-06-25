@@ -25,7 +25,7 @@ function formSubmitRoutes(fastify, options, done) {
         }
     });
 
-    fastify.options('/surveyform', async (request, reply) => {});
+    //fastify.options('/surveyform', async (request, reply) => {});
 
     done()
 }
