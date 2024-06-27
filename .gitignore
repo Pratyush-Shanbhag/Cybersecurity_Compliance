@@ -1,1 +1,4 @@
-/.DS_Store
+.DS_Store
+Week_3/aws_codewhisperer_workshop/
+**/node_modules/
+test_instance.pem
