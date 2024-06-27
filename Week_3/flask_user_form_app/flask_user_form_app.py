@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 import boto3
 
-import db_functions
-
 app = Flask(__name__)
 
 # AWS S3 configuration
-AWS_ACCESS_KEY = 'AKIA3FLD6H2OHWWUPEXW'
-AWS_SECRET_KEY = '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'
+AWS_ACCESS_KEY = 'asdfasdfsdf'
+AWS_SECRET_KEY = 'asdfadsfdsf'
 AWS_REGION = 'us-east-1'
 S3_BUCKETS = {
     'low': 'low-flask-user-form-app',
@@ -38,17 +36,6 @@ def get_from_s3(bucket_name):
 @app.route('/')
 def index():
     return render_template('app.html')
-
-'''
-@app.route('/result', methods=['POST'])
-def result():
-    option = request.form.get('options')
-    bucket_name = S3_BUCKETS.get(option)
-    if bucket_name:
-        s3_text = get_from_s3(bucket_name)
-        return render_template('result.html', s3_text=s3_text)
-    return "Invalid option selected."
-'''
 
 @app.route('/result', methods=['POST'])
 def result():
