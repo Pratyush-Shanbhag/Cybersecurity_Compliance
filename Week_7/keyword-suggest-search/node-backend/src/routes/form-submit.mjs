@@ -1,23 +1,32 @@
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
 
-const client = new DynamoDBClient({});
+const client = new DynamoDBClient();
+const ddbDocClient = DynamoDBDocumentClient.from(client);
 
 function formSubmitRoutes(fastify, options, done) {
-    fastify.get('/keywords', async (request, reply) => {
-        const { name, email, experience, age } = request.body;
-      
+    fastify.get('/keywords', async (request, reply) => {      
         const params = {
-        TableName: 'keyword-suggest-table',
-            Item: {
-                username: name,
-                email: email,
-            },
+            TableName: 'keyword-suggest-search-table',
+            ProjectionExpression: '#k, #v',
+            ExpressionAttributeNames: {
+                '#k': 'keyword',
+                '#v': 'value'
+            }        
         };
       
         try {
-            const data = await client.send(new ScanCommand(params));
-            const keywords = data.Items.map(item => item.keyword.S);
-            reply.send(keywords);
+            const response = await ddbDocClient.send(new ScanCommand(params));
+            if (!response.Items) {
+                reply.status(404).send({ error: 'No keywords found' });
+                return;
+            }
+
+            const data = response.Items.map(item => ({
+                keyword: item.keyword,
+                value: item.value
+            }));
+            reply.send({ data });
         } catch (error) {
             fastify.log.error(error);
             reply.status(500).send({ error: 'Error fetching data from DynamoDB' });
