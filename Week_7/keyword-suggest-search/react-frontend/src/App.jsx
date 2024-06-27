@@ -3,40 +3,70 @@ import axios from 'axios';
 import './App.css'
 
 const App = () => {
-    const [suggestions, setSuggestions] = useState([]);
-    const [error, setError] = useState(null);
+    const [data, setData] = useState([]);
+    const [selectedKeyword, setSelectedKeyword] = useState('');
+    const [submittedKeyword, setSubmittedKeyword] = useState('');
+    const [submittedValue, setSubmittedValue] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        const fetchSuggestions = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/suggestions', {
+                const response = await axios.get('http://localhost:3000/keywords', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
-                setSuggestions(JSON.stringify(response.data));
+                setData(response.data.data);
                 console.log('worked')
             } catch (error) {
                 setError('Failed to fetch suggestions');
             }
         }
-        fetchSuggestions();
+        fetchData();
+        console.log(data)
     }, [])
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const selected = data.find(entry => entry.keyword === selectedKeyword);
+        if(selected) {
+            setSubmittedKeyword(selectedKeyword);
+            setSubmittedValue(selected.value);
+        }
+        else {
+            setSubmittedKeyword('');
+            setSubmittedValue('');
+        }
+    };
 
     return (
         <div className="App">
-            <h1>Keyword Suggest Search</h1>
-            {error ? (
-            <div className="error">Error: {error}</div>
-            ) : (
-            <div>
-                <input list="suggestions" name="keyword" placeholder="Enter" />
-                <datalist id="suggestions">
-                    {suggestions.map((item, index) => (
-                        <option key={index} value={item.keyword}></option>
-                    ))}
-                </datalist>
-            </div>
+            <h1>Keyword Search App</h1>
+            {error && <p>{error}</p>}
+            {!error && (
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="keyword">Select a keyword:</label>
+                    <input 
+                        list="keywords"
+                        id="keyword" 
+                        name="keyword"
+                        placeholder='Enter'
+                        value={selectedKeyword} 
+                        onChange={(e) => setSelectedKeyword(e.target.value)} 
+                        required 
+                    />
+                    <datalist id="keywords">
+                        {data.map((item, index) => (
+                            <option key={item.keyword} value={item.keyword} />
+                        ))}
+                    </datalist>
+                    <button type="submit">Submit</button>
+                </form>
+            )}
+            {submittedValue && (
+                <p>You selected: Keyword: {submittedKeyword}, Value: {submittedValue}</p>
             )}
         </div>
     );
