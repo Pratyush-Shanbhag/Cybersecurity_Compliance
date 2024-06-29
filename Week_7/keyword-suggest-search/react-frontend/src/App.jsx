@@ -68,7 +68,7 @@ const App = () => {
             {submittedValue && (
                 <p>You selected: Keyword: {submittedKeyword}, Value: {submittedValue}</p>
             )}
-        </div>
+        </div> 
     );
 }
 
