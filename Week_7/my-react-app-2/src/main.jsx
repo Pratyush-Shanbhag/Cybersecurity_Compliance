@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import SurveyForm from './survey_form_2'
 import Results from './results'
-import SignUpForm from './sign_up_form'
+import SignUp from './sign_up_form'
+import SignIn from './sign_in'
+import "./index.css"
+import Example from './a'
 
 /*
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -50,7 +53,7 @@ const App = () => {
     */
 
         <div className="App">
-        <SignUpForm/>
+        <Example/>
         </div>
     )
 }

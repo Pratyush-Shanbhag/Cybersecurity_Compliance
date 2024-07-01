@@ -1,25 +1,4 @@
-<<<<<<< HEAD
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 
-const client = new DynamoDBClient({});
-
-function formSubmitRoutes(fastify, options, done) {
-    fastify.get('/keywords', async (request, reply) => {
-        const { name, email, experience, age } = request.body;
-      
-        const params = {
-        TableName: 'keyword-suggest-table',
-            Item: {
-                username: name,
-                email: email,
-            },
-        };
-      
-        try {
-            const data = await client.send(new ScanCommand(params));
-            const keywords = data.Items.map(item => item.keyword.S);
-            reply.send(keywords);
-=======
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
 
@@ -49,7 +28,6 @@ function formSubmitRoutes(fastify, options, done) {
                 value: item.value
             }));
             reply.send({ data });
->>>>>>> repair2
         } catch (error) {
             fastify.log.error(error);
             reply.status(500).send({ error: 'Error fetching data from DynamoDB' });
