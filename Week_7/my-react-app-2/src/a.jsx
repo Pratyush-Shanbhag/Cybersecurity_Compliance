@@ -8,7 +8,7 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Courses', href: '#', current: true },
+  { name: 'Courses', href: './survey_form_2.jsx', current: true },
   { name: 'Search', href: '#', current: false },
   { name: 'Assessments', href: '#', current: false },
 ]
@@ -157,14 +157,32 @@ export default function Example() {
 
         </header>
         <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"><img
-                        className="size-45 bg-stone-50"
-                        src="https://static.vecteezy.com/system/resources/previews/002/314/294/non_2x/network-security-web-concept-with-people-vector.jpg" 
-                        alt="Your Company"
-                      /></div>
+        <div className="flex justify-between items-center h-screen px-4 bg-cyan-100">
+        <div className="w-1/2">
+            <h1 className="text-4xl font-bold">Learn Core Cybersecurity Concepts</h1>
+            <p className="mt-4 text-lg">
+            Sign up and get access to hundreds of courses spanning all the popular topics in the space!
+            </p>
+        </div>
+        <div className="w-1/2 flex justify-end">
+            <img src="https://static.vecteezy.com/system/resources/previews/002/314/294/non_2x/network-security-web-concept-with-people-vector.jpg" alt="Description" className="max-w-full h-auto" />
+        </div>
+        </div>  
+
         </main>
         
       </div>
     </>
   )
 }
+
+
+/*
+
+<div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"><img
+                        className="size-45 bg-stone-50"
+                        src="https://static.vecteezy.com/system/resources/previews/002/314/294/non_2x/network-security-web-concept-with-people-vector.jpg" 
+                        alt="Your Company"
+                      /></div>
+
+*/

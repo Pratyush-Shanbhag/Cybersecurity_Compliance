@@ -5,7 +5,7 @@ import Results from './results'
 import SignUp from './sign_up_form'
 import SignIn from './sign_in'
 import "./index.css"
-import Example from './a'
+import Homepage from './a'
 
 /*
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -53,8 +53,14 @@ const App = () => {
     */
 
         <div className="App">
-        <Example/>
+        <SignUp/>
         </div>
+
+        /*
+        <div className="App">
+        <SignUp/>
+        </div>
+        */
     )
 }
 
